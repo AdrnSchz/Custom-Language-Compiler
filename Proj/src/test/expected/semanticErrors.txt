@@ -1,0 +1,23 @@
+------------------------------ What a boomer ¬_¬ ------------------------------
+
+Line 25 | Column 0 -> Missing throwback statement in function: fibonacci
+
+Line 0 | Column 0 -> Function cannot be declared as constant
+
+Line 25 | Column 0 -> Variable: const is a constant, you cannot assign it a value
+
+Line 25 | Column 0 -> Function: fibonacci expects 1 parameters and receives 0
+
+Line 0 | Column 0 -> Condition must be a bipolar expression
+
+Line 25 | Column 0 -> Function: test is not declared
+
+Line 25 | Column 0 -> Variable "fibonacci" expects bro and receives dec_lit
+
+------------------------------ A little sus ◔_◔ ------------------------------
+
+Line 25 | Column 0 -> Variable: const2, is being declared as a constant without being initialized
+
+Line 25 | Column 0 -> Variable: inode, might not be initialized
+
+

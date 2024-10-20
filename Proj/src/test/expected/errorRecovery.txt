@@ -1,0 +1,14 @@
+
+------------------------------ Ohh, your canceled :) ------------------------------
+
+Line 2 | Column 2 -> Unexpected token '.', expected 'name'
+
+Line 5 | Column 1 -> Unexpected token '.', expected '¿'
+
+Line 9 | Column 0 -> Unexpected token '¿', expected '!'
+
+------------------------------ What a boomer ¬_¬ ------------------------------
+
+Line 9 | Column 0 -> Variable: res, does not exist
+
+

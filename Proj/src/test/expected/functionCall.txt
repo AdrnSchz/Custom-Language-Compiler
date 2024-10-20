@@ -1,0 +1,45 @@
+	.data
+TRUE: .float   1
+	.text
+	.data
+FALSE: .float   0
+	.text
+	li   $fp, 2147483644
+	move $sp, $fp
+	j    _CEO
+_func1:
+	sw   $ra, 0($fp)
+	li   $t0, 2
+	sub  $sp, $sp, 4
+	move $v0, $t0
+	move $sp, $fp
+	addi $sp, $sp, 8
+	lw   $ra, 0($fp)
+	lw   $fp, 4($fp)
+	jr   $ra
+_func2:
+	sw   $ra, 0($fp)
+	sw   $fp, -4($sp)
+	sub  $sp, $sp, 8
+	move $fp, $sp
+	jal  _func1
+	l.s  $f0, -4($fp)
+	cvt.w.s $f0, $f0
+	mfc1 $v0, $f0
+	move $sp, $fp
+	addi $sp, $sp, 8
+	lw   $ra, 0($fp)
+	lw   $fp, 4($fp)
+	jr   $ra
+_CEO:
+	li   $t1, 5
+	sub  $sp, $sp, 4
+	sw   $t1, -4($fp)
+	sw   $fp, -4($sp)
+	sub  $sp, $sp, 8
+	move $fp, $sp
+	sw   $t1, -4($sp)
+	sub  $sp, $sp, 4
+	jal  _func2
+	li   $v0, 10
+	syscall

@@ -1,0 +1,26 @@
+fact bro const = 0.
+fact bro const2.
+
+bro fibonacci ¿bro num? ¡
+    sis inode.
+    like ¿num >= 0? ¡
+    	inode = 3.
+    !
+    whatever ¡
+    	inode += 1.
+    !
+!
+
+fact sis hello ¿? ¡
+   throwback 'a'.
+!
+CEO ¡
+    const = 1.
+    sis res = fibonacci¿?.
+    
+    like ¿ 3 ? ¡
+    	test ¿?.
+    !
+    bro fibonacci = 0´3.
+    
+!

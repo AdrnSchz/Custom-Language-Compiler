@@ -1,0 +1,38 @@
+<< Program to compute the area of a
+    given figure
+	Author: Andrea
+	Version: 3.33
+	Date: 15-05-2024 >>
+
+<< Globals declaration >>
+sis area = 0.
+
+<< Area computation >>
+zombie computeArea ¿ mainchar shape, sis width, sis height, sis radius ? ¡
+    swipe ¿ shape ? ¡
+        right 'S': <<Square>>
+            area = height * 2.
+            periodt.
+
+        right 'T': <<Triangle>>
+            area = height * width / 2.
+            periodt.
+
+        right 'C': <<Circle>>
+            area = 3´14 * radius * radius.
+            periodt.
+    !
+    throwback ghosted.
+!
+
+<< Main function >>
+CEO ¡
+    << Define measures >>
+    sis width = 5.
+    sis height = 3.
+    sis radius = 4´3.
+
+    << Determine area >>
+    computeArea ¿ 'T', width, height, radius ?.
+    sis res = area.
+!

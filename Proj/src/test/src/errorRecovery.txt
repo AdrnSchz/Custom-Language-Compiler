@@ -1,0 +1,10 @@
+CEO ¡
+    << Unexpected token . >>
+    bro . a = 2.
+
+    << Extra token . >>
+    4 .¿ bro i = 0 . i < 5 . i++ ? ¡
+        res += 2 .
+    << Wrong token ¿ when expecting ! >>
+    ¿
+!

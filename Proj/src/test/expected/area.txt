@@ -1,0 +1,164 @@
+	.data
+TRUE: .float   1
+	.text
+	.data
+FALSE: .float   0
+	.text
+	li   $fp, 2147483644
+	move $sp, $fp
+	.data
+area_: .float   0
+	.text
+	li   $t0, 0
+	sub  $sp, $sp, 4
+	l.s  $f0, area_
+	mtc1 $t0, $f0
+	cvt.s.w $f0, $f0
+	sw   $t0, -4($fp)
+	s.s  $f0, area_
+	j    _CEO
+_computeArea:
+	sw   $ra, 0($fp)
+	j    check0
+if0:
+	li   $t1, 2
+	sub  $sp, $sp, 4
+	l.s  $f2, -12($fp)
+	mtc1 $t1, $f4
+	cvt.s.w $f4, $f4
+	mul.s $f4, $f2, $f4
+	l.s  $f6, area_
+	mov.s $f6, $f4
+	s.s  $f2, -12($fp)
+	sw   $t1, -20($fp)
+	s.s  $f6, area_
+	j    continue0
+elif1:
+	l.s  $f8, -12($fp)
+	l.s  $f10, -8($fp)
+	mul.s $f12, $f8, $f10
+	li   $t4, 2
+	sub  $sp, $sp, 4
+	mtc1 $t4, $f14
+	cvt.s.w $f14, $f14
+	div.s $f14, $f12, $f14
+	l.s  $f16, area_
+	mov.s $f16, $f14
+	s.s  $f10, -8($fp)
+	s.s  $f8, -12($fp)
+	sw   $t4, -24($fp)
+	s.s  $f16, area_
+	j    continue0
+elif2:
+	.data
+r18: .float   3.14
+	.text
+	l.s   $f18, r18
+	sub  $sp, $sp, 4
+	l.s  $f20, -16($fp)
+	mul.s $f22, $f18, $f20
+	mul.s $f24, $f22, $f20
+	l.s  $f26, area_
+	mov.s $f26, $f24
+	s.s  $f20, -16($fp)
+	s.s  $f18, -28($fp)
+	s.s  $f26, area_
+	j    continue0
+check0:
+	li   $t8, 83
+	sub  $sp, $sp, 4
+	lw   $t0, -4($fp)
+	mtc1 $t8, $f28
+	cvt.s.w $f28, $f28
+	mtc1 $t0, $f30
+	cvt.s.w $f30, $f30
+	c.eq.s $f28, $f30
+	l.s   $f28, FALSE
+	l.s   $f30, TRUE
+	movt.s $f28, $f30
+	cvt.w.s $f28, $f28
+	mfc1 $t9, $f28
+	li   $t1, 84
+	sub  $sp, $sp, 4
+	mtc1 $t1, $f30
+	cvt.s.w $f30, $f30
+	mtc1 $t0, $f0
+	cvt.s.w $f0, $f0
+	c.eq.s $f30, $f0
+	l.s   $f30, FALSE
+	l.s   $f0, TRUE
+	movt.s $f30, $f0
+	cvt.w.s $f30, $f30
+	mfc1 $t2, $f30
+	li   $t3, 67
+	sub  $sp, $sp, 4
+	mtc1 $t3, $f0
+	cvt.s.w $f0, $f0
+	mtc1 $t0, $f2
+	cvt.s.w $f2, $f2
+	c.eq.s $f0, $f2
+	l.s   $f0, FALSE
+	l.s   $f2, TRUE
+	movt.s $f0, $f2
+	cvt.w.s $f0, $f0
+	mfc1 $t4, $f0
+	bgtz $t9, if0
+	bgtz $t2, elif1
+	bgtz $t4, elif2
+continue0:
+	move $sp, $fp
+	addi $sp, $sp, 8
+	lw   $ra, 0($fp)
+	lw   $fp, 4($fp)
+	jr   $ra
+_CEO:
+	sub  $sp, $sp, 4
+	li   $t5, 5
+	sub  $sp, $sp, 4
+	l.s  $f2, -4($fp)
+	mtc1 $t5, $f2
+	cvt.s.w $f2, $f2
+	sub  $sp, $sp, 4
+	li   $t6, 3
+	sub  $sp, $sp, 4
+	l.s  $f4, -12($fp)
+	mtc1 $t6, $f4
+	cvt.s.w $f4, $f4
+	sub  $sp, $sp, 4
+	.data
+r26: .float   4.3
+	.text
+	l.s   $f6, r26
+	sub  $sp, $sp, 4
+	l.s  $f8, -20($fp)
+	mov.s $f8, $f6
+	li   $t7, 84
+	sub  $sp, $sp, 4
+	s.s  $f2, -4($fp)
+	s.s  $f4, -12($fp)
+	sw   $t5, -8($fp)
+	s.s  $f8, -20($fp)
+	sw   $t6, -16($fp)
+	sw   $t7, -28($fp)
+	s.s  $f6, -24($fp)
+	sw   $fp, -4($sp)
+	sub  $sp, $sp, 8
+	move $fp, $sp
+	sw   $t7, -4($sp)
+	sub  $sp, $sp, 4
+	mfc1 $t8, $f2
+	sw   $t8, -4($sp)
+	sub  $sp, $sp, 4
+	mfc1 $t8, $f4
+	sw   $t8, -4($sp)
+	sub  $sp, $sp, 4
+	mfc1 $t8, $f8
+	sw   $t8, -4($sp)
+	sub  $sp, $sp, 4
+	jal  _computeArea
+	sub  $sp, $sp, 4
+	l.s  $f10, area_
+	l.s  $f12, -32($fp)
+	mov.s $f12, $f10
+	li   $v0, 10
+	syscall

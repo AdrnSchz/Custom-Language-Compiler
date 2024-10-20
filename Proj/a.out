@@ -1,0 +1,57 @@
+	.data
+TRUE: .float   1
+	.text
+	.data
+FALSE: .float   0
+	.text
+	li   $fp, 2147483644
+	move $sp, $fp
+	j    _CEO
+_CEO:
+	sub  $sp, $sp, 4
+	sub  $sp, $sp, 4
+	li   $t0, 0
+	sub  $sp, $sp, 4
+	lw   $t1, -8($fp)
+	move $t1, $t0
+	sw   $t1, -8($fp)
+	sw   $t0, -12($fp)
+	j    check0
+for0:
+	j    check1
+while1:
+check1:
+	li   $t2, 0
+	sub  $sp, $sp, 4
+	bgtz $t2, while1
+continue1:
+	lw   $t3, -8($fp)
+	lw   $t4, -4($fp)
+	move $t4, $t3
+	li   $t5, 1
+	sub  $sp, $sp, 4
+	add  $t7, $t3, $t5
+	move $t6, $t7
+	move $t3, $t6
+	sw   $t3, -8($fp)
+	sw   $t2, -16($fp)
+	sw   $t5, -20($fp)
+	sw   $t4, -4($fp)
+check0:
+	li   $t7, 5
+	sub  $sp, $sp, 4
+	lw   $t9, -8($fp)
+	mtc1 $t9, $f0
+	cvt.s.w $f0, $f0
+	mtc1 $t7, $f2
+	cvt.s.w $f2, $f2
+	c.lt.s $f0, $f2
+	l.s   $f0, FALSE
+	l.s   $f2, TRUE
+	movt.s $f0, $f2
+	cvt.w.s $f0, $f0
+	mfc1 $t8, $f0
+	bgtz $t8, for0
+continue0:
+	li   $v0, 10
+	syscall

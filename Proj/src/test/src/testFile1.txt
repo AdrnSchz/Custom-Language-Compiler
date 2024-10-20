@@ -1,0 +1,45 @@
+<< Program to compute happiness level
+    according to average grades
+	Author: Adrian
+	Version: 3.33
+	Date: 2-3-2023 >>
+
+<< Happiness levels declaration >>
+bro MAX = 100.
+bro MEH = 50.
+bro NONE = 0.
+
+<< Passing calculation >>
+bipolar goodEnough ¿ sis average ? ¡
+    like ¿ average >= 5 ? ¡
+        throwback smash.
+    !
+    throwback pass.
+!
+
+<< Principal function of the program
+	Author: Adrian
+	Version: 3.33
+	Date: 2-3-2023 >>
+CEO ¡
+	fam 10 sis grades = [ 2´9, 5´8, 8´0, 7´1, 5´2, 4´9, 6´9, 5´7, 6´3, 7´5 ] .
+
+	<< Average grade calculation >>
+	sis average = 0 .
+	4 ¿ bro i = 0 . i < 10 . i++ ? ¡
+		average += grades[i] .
+	!
+	average /= 10 .
+
+	<< Check the happiness level of the student >>
+    sis happiness.
+    bipolar passed = goodEnough ¿average?.
+
+	like ¿ passed == smash & average >= 9 ? ¡
+		happiness = MAX.
+ 	! whatever like ¿ passed == smash ? ¡
+ 	    happiness = MEH.
+	! whatever ¡
+ 		happiness = NONE.
+	!
+!

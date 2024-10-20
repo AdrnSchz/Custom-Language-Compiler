@@ -1,0 +1,151 @@
+	.data
+TRUE: .float   1
+	.text
+	.data
+FALSE: .float   0
+	.text
+	li   $fp, 2147483644
+	move $sp, $fp
+	j    _CEO
+_fibonacci:
+	sw   $ra, 0($fp)
+	sub  $sp, $sp, 4
+	li   $t0, 0
+	sub  $sp, $sp, 4
+	lw   $t1, -8($fp)
+	move $t1, $t0
+	sub  $sp, $sp, 4
+	li   $t2, 1
+	sub  $sp, $sp, 4
+	lw   $t3, -16($fp)
+	move $t3, $t2
+	sub  $sp, $sp, 4
+	li   $t4, 0
+	sub  $sp, $sp, 4
+	lw   $t5, -24($fp)
+	move $t5, $t4
+	sw   $t1, -8($fp)
+	sw   $t0, -12($fp)
+	sw   $t3, -16($fp)
+	sw   $t2, -20($fp)
+	sw   $t5, -24($fp)
+	sw   $t4, -28($fp)
+	j    check0
+if0:
+	li   $t6, 0
+	sub  $sp, $sp, 4
+	lw   $t7, -24($fp)
+	move $t7, $t6
+	sw   $t6, -32($fp)
+	sw   $t7, -24($fp)
+	j    continue0
+check0:
+	li   $t8, 0
+	sub  $sp, $sp, 4
+	lw   $t0, -4($fp)
+	mtc1 $t0, $f0
+	cvt.s.w $f0, $f0
+	mtc1 $t8, $f2
+	cvt.s.w $f2, $f2
+	c.eq.s $f0, $f2
+	l.s   $f0, FALSE
+	l.s   $f2, TRUE
+	movt.s $f0, $f2
+	cvt.w.s $f0, $f0
+	mfc1 $t9, $f0
+	bgtz $t9, if0
+continue0:
+	sw   $t8, -36($fp)
+	sw   $t0, -4($fp)
+	j    check1
+if1:
+	li   $t1, 1
+	sub  $sp, $sp, 4
+	lw   $t2, -24($fp)
+	move $t2, $t1
+	sw   $t2, -24($fp)
+	sw   $t1, -40($fp)
+	j    continue1
+check1:
+	li   $t3, 1
+	sub  $sp, $sp, 4
+	lw   $t5, -4($fp)
+	mtc1 $t5, $f2
+	cvt.s.w $f2, $f2
+	mtc1 $t3, $f4
+	cvt.s.w $f4, $f4
+	c.eq.s $f2, $f4
+	l.s   $f2, FALSE
+	l.s   $f4, TRUE
+	movt.s $f2, $f4
+	cvt.w.s $f2, $f2
+	mfc1 $t4, $f2
+	bgtz $t4, if1
+continue1:
+	sub  $sp, $sp, 4
+	li   $t6, 2
+	sub  $sp, $sp, 4
+	lw   $t7, -48($fp)
+	move $t7, $t6
+	sw   $t3, -44($fp)
+	sw   $t7, -48($fp)
+	sw   $t6, -52($fp)
+	sw   $t5, -4($fp)
+	j    check2
+for2:
+	lw   $t9, -8($fp)
+	lw   $t0, -16($fp)
+	add  $t1, $t9, $t0
+	move $t8, $t1
+	lw   $t1, -24($fp)
+	move $t1, $t8
+	move $t9, $t0
+	move $t0, $t1
+	li   $t2, 1
+	sub  $sp, $sp, 4
+	lw   $t4, -48($fp)
+	add  $t5, $t4, $t2
+	move $t3, $t5
+	move $t4, $t3
+	sw   $t9, -8($fp)
+	sw   $t0, -16($fp)
+	sw   $t1, -24($fp)
+	sw   $t4, -48($fp)
+	sw   $t2, -56($fp)
+check2:
+	lw   $t6, -48($fp)
+	lw   $t7, -4($fp)
+	mtc1 $t6, $f4
+	cvt.s.w $f4, $f4
+	mtc1 $t7, $f6
+	cvt.s.w $f6, $f6
+	c.le.s $f4, $f6
+	l.s   $f4, FALSE
+	l.s   $f6, TRUE
+	movt.s $f4, $f6
+	cvt.w.s $f4, $f4
+	mfc1 $t5, $f4
+	bgtz $t5, for2
+continue2:
+	lw   $t8, -24($fp)
+	move $v0, $t8
+	move $sp, $fp
+	addi $sp, $sp, 8
+	lw   $ra, 0($fp)
+	lw   $fp, 4($fp)
+	jr   $ra
+_CEO:
+	sub  $sp, $sp, 4
+	li   $t9, 3
+	sub  $sp, $sp, 4
+	sw   $t9, -8($fp)
+	sw   $fp, -4($sp)
+	sub  $sp, $sp, 8
+	move $fp, $sp
+	sw   $t9, -4($sp)
+	sub  $sp, $sp, 4
+	jal  _fibonacci
+	lw   $t0, -4($fp)
+	move $t0, $v0
+	li   $v0, 10
+	syscall

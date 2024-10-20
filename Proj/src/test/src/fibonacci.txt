@@ -1,0 +1,34 @@
+<< Program to compute fibonacci sequence
+    of a number
+	Author: Marc
+	Version: 3.33
+	Date: 7-5-2023 >>
+
+<< Globals declaration >>
+fact bro ZERO = 0.
+fact bro ONE = 1.
+
+<< Fibonacci sequence >>
+bro fibonacci ¿ bro num ? ¡
+ 	swipe ¿ num ? ¡
+     	right 0:
+  			throwback ZERO.
+  		right 1:
+ 		    throwback ONE.
+ 		left:
+ 		    bro fVal = fibonacci ¿num - 1?.
+ 		    fVal += fibonacci ¿num - 2?.
+ 			throwback fVal.
+ 	!
+ 	throwback ZERO.
+ !
+
+<< Main function of the program
+	Author: Adrian
+	Version: 3.33
+	Date: 2-3-2023 >>
+CEO ¡
+    bro num = 6.
+    << Compute fibonacci >>
+	bro fib = fibonacci¿ num ?.
+!

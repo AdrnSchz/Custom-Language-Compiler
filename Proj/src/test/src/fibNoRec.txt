@@ -1,0 +1,33 @@
+<< Program to compute fibonacci sequence
+    of a number
+	Author: Marc
+	Version: 3.33
+	Date: 7-5-2023 >>
+
+bro fibonacci ¿bro num? ¡
+    bro fib0 = 0.
+    bro fib1 = 1.
+    bro nextFib = 0.
+
+    like ¿ num == 0? ¡
+        nextFib = 0.
+    !
+    like ¿ num == 1? ¡
+        nextFib = 1.
+    !
+
+    4 ¿bro i = 2. i <= num. i++? ¡
+        nextFib = fib0 + fib1.
+
+        fib0 = fib1.
+        fib1 = nextFib.
+    !
+
+    throwback nextFib.
+!
+
+<< Main function >>
+CEO ¡
+    bro res = fibonacci ¿3?.
+!
+

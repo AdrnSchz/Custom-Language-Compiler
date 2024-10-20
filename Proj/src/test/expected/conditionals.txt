@@ -1,0 +1,112 @@
+	.data
+TRUE: .float   1
+	.text
+	.data
+FALSE: .float   0
+	.text
+	li   $fp, 2147483644
+	move $sp, $fp
+	j    _CEO
+_CEO:
+	sub  $sp, $sp, 4
+	li   $t0, 7
+	sub  $sp, $sp, 4
+	lw   $t1, -4($fp)
+	move $t1, $t0
+	sub  $sp, $sp, 4
+	li   $t2, 1
+	sub  $sp, $sp, 4
+	lw   $t3, -12($fp)
+	move $t3, $t2
+	sub  $sp, $sp, 4
+	sw   $t0, -8($fp)
+	sw   $t3, -12($fp)
+	sw   $t2, -16($fp)
+	sw   $t1, -4($fp)
+	j    check0
+if0:
+	j    check1
+if1:
+	li   $t4, 3
+	sub  $sp, $sp, 4
+	lw   $t5, -20($fp)
+	move $t5, $t4
+	sw   $t4, -24($fp)
+	sw   $t5, -20($fp)
+	j    continue1
+else2:
+	li   $t6, 0
+	sub  $sp, $sp, 4
+	lw   $t7, -20($fp)
+	move $t7, $t6
+	sw   $t6, -28($fp)
+	sw   $t7, -20($fp)
+	j    continue1
+check1:
+	li   $t8, 1
+	sub  $sp, $sp, 4
+	lw   $t0, -12($fp)
+	mtc1 $t0, $f0
+	cvt.s.w $f0, $f0
+	mtc1 $t8, $f2
+	cvt.s.w $f2, $f2
+	c.eq.s $f0, $f2
+	l.s   $f0, FALSE
+	l.s   $f2, TRUE
+	movt.s $f0, $f2
+	cvt.w.s $f0, $f0
+	mfc1 $t9, $f0
+	bgtz $t9, if1
+	j    else2
+continue1:
+	sw   $t0, -12($fp)
+	sw   $t8, -32($fp)
+	j    continue0
+elif3:
+	li   $t1, 8
+	sub  $sp, $sp, 4
+	lw   $t2, -20($fp)
+	move $t2, $t1
+	sw   $t2, -20($fp)
+	sw   $t1, -36($fp)
+	j    continue0
+else4:
+	li   $t3, 2
+	sub  $sp, $sp, 4
+	lw   $t4, -20($fp)
+	move $t4, $t3
+	sw   $t4, -20($fp)
+	sw   $t3, -40($fp)
+	j    continue0
+check0:
+	li   $t5, 0
+	sub  $sp, $sp, 4
+	lw   $t7, -4($fp)
+	mtc1 $t5, $f2
+	cvt.s.w $f2, $f2
+	mtc1 $t7, $f4
+	cvt.s.w $f4, $f4
+	c.eq.s $f2, $f4
+	l.s   $f2, FALSE
+	l.s   $f4, TRUE
+	movt.s $f2, $f4
+	cvt.w.s $f2, $f2
+	mfc1 $t6, $f2
+	li   $t8, 1
+	sub  $sp, $sp, 4
+	mtc1 $t8, $f4
+	cvt.s.w $f4, $f4
+	mtc1 $t7, $f6
+	cvt.s.w $f6, $f6
+	c.eq.s $f4, $f6
+	l.s   $f4, FALSE
+	l.s   $f6, TRUE
+	movt.s $f4, $f6
+	cvt.w.s $f4, $f4
+	mfc1 $t9, $f4
+	bgtz $t6, if0
+	bgtz $t9, elif3
+	j    else4
+continue0:
+	li   $v0, 10
+	syscall

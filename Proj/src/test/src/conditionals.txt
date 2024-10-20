@@ -1,0 +1,18 @@
+CEO¡
+    bro num = 7.
+    bipolar bool = smash.
+    bro res.
+    swipe ¿ num ? ¡
+     	right 0:
+  			like ¿ bool == smash? ¡
+  			    res = 3.
+  			!
+  			whatever ¡
+  			    res = 0.
+  			!
+  		right 1:
+ 		    res = 8.
+ 		left:
+ 		    res = 2.
+ 	!
+!

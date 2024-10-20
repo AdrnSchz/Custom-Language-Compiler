@@ -1,0 +1,12 @@
+bro func1 ¿? ¡
+    throwback 2.
+!
+
+sis func2 ¿ sis average ? ¡
+    func1 ¿?.
+    throwback average.
+!
+
+CEO ¡
+	func2 ¿5?.
+!

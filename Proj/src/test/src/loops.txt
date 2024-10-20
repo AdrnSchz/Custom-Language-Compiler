@@ -1,0 +1,11 @@
+
+CEO¡
+    bro r.
+    4 ¿bro i = 0. i < 5. i++? ¡
+
+        vibe check ¿ pass ? ¡
+
+        !
+        r = i.
+    !
+!
